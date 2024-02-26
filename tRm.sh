@@ -1,9 +1,16 @@
 #!/bin/bash
 
-read -p "alias with rm? (y/n)" ans
+TRASH=$HOME
+TRASH+="/.local/share/Trash/files"
 
-if $ans == "y";
-then
-	echo "yes"
+if [ ! -e $TRASH ] 
+then 
+	mkdir $TRASH
+fi
 
-
+for file in $@
+do
+	FPATH="$PWD/$file"
+	echo "$file deleted."
+	mv $FPATH $TRASH	
+done
